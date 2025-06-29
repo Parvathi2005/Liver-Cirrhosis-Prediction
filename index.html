@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liver Disease Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='liver-bg.png') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark transparent overlay */
+            z-index: 0;
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            margin: 5% auto;
+        }
+
+        .form-title {
+            text-align: center;
+            font-weight: bold;
+            color: #9B2226;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        .btn-danger {
+            background-color: #9B2226;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #7a1b1f;
+        }
+
+        input, select {
+            border-radius: 8px !important;
+        }
+
+        .alert {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2 class="form-title">🧬 Liver Disease Prediction</h2>
+    <form method="POST" action="/predict">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <input type="number" name="Age" class="form-control" placeholder="Age" required>
+            </div>
+            <div class="col-md-6">
+                <select name="Gender" class="form-select" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Total_Bilirubin" class="form-control" placeholder="Total Bilirubin" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Direct_Bilirubin" class="form-control" placeholder="Direct Bilirubin" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Alkaline_Phosphotase" class="form-control" placeholder="Alkaline Phosphotase" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Alamine_Aminotransferase" class="form-control" placeholder="Alamine Aminotransferase" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Aspartate_Aminotransferase" class="form-control" placeholder="Aspartate Aminotransferase" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Total_Proteins" class="form-control" placeholder="Total Proteins" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Albumin" class="form-control" placeholder="Albumin" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" step="any" name="Albumin_and_Globulin_Ratio" class="form-control" placeholder="Albumin and Globulin Ratio" required>
+            </div>
+        </div>
+
+        <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-danger btn-lg">Predict</button>
+        </div>
+
+        {% if result %}
+        <div class="alert alert-info text-center mt-4" role="alert">
+            result
+        </div>
+        {% endif %}
+    </form>
+</div>
+
+</body>
+</html>
